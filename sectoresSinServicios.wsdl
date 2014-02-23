@@ -1,0 +1,152 @@
+<!--This XML file does not appear to have any style information associated with it. The document tree is shown below.-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd"
+                  xmlns:ns="http://ws.breakdown.prepa.com" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:ax21="http://persistence.breakdown.prepa.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  targetNamespace="http://ws.breakdown.prepa.com">
+    <wsdl:documentation>Prepa Breakdown Report</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified"
+                   targetNamespace="http://persistence.breakdown.prepa.com/xsd">
+            <xs:complexType name="BreakdownArea">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="r2Area" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="r3Status" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="r1TownOrCity" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="r4LastUpdate" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="BreakdownSummary">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="r1TownOrCity" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="r2TotalBreakdowns" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax22="http://persistence.breakdown.prepa.com/xsd" attributeFormDefault="qualified"
+                   elementFormDefault="qualified" targetNamespace="http://ws.breakdown.prepa.com">
+            <xs:import namespace="http://persistence.breakdown.prepa.com/xsd"/>
+            <xs:element name="getBreakdownsByTownOrCity">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="townOrCity" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getBreakdownsByTownOrCityResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true"
+                                    type="ax22:BreakdownArea"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getBreakdownsSummaryResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true"
+                                    type="ax22:BreakdownSummary"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getBreakdownsByTownOrCityRequest">
+        <wsdl:part name="parameters" element="ns:getBreakdownsByTownOrCity"/>
+    </wsdl:message>
+    <wsdl:message name="getBreakdownsByTownOrCityResponse">
+        <wsdl:part name="parameters" element="ns:getBreakdownsByTownOrCityResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getBreakdownsSummaryRequest"/>
+    <wsdl:message name="getBreakdownsSummaryResponse">
+        <wsdl:part name="parameters" element="ns:getBreakdownsSummaryResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="BreakdownReportPortType">
+        <wsdl:operation name="getBreakdownsByTownOrCity">
+            <wsdl:input message="ns:getBreakdownsByTownOrCityRequest" wsaw:Action="urn:getBreakdownsByTownOrCity"/>
+            <wsdl:output message="ns:getBreakdownsByTownOrCityResponse"
+                         wsaw:Action="urn:getBreakdownsByTownOrCityResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getBreakdownsSummary">
+            <wsdl:input message="ns:getBreakdownsSummaryRequest" wsaw:Action="urn:getBreakdownsSummary"/>
+            <wsdl:output message="ns:getBreakdownsSummaryResponse" wsaw:Action="urn:getBreakdownsSummaryResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="BreakdownReportSoap11Binding" type="ns:BreakdownReportPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getBreakdownsByTownOrCity">
+            <soap:operation soapAction="urn:getBreakdownsByTownOrCity" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getBreakdownsSummary">
+            <soap:operation soapAction="urn:getBreakdownsSummary" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="BreakdownReportSoap12Binding" type="ns:BreakdownReportPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getBreakdownsByTownOrCity">
+            <soap12:operation soapAction="urn:getBreakdownsByTownOrCity" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getBreakdownsSummary">
+            <soap12:operation soapAction="urn:getBreakdownsSummary" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="BreakdownReportHttpBinding" type="ns:BreakdownReportPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="getBreakdownsByTownOrCity">
+            <http:operation location="BreakdownReport/getBreakdownsByTownOrCity"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getBreakdownsByTownOrCity"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getBreakdownsByTownOrCity"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getBreakdownsSummary">
+            <http:operation location="BreakdownReport/getBreakdownsSummary"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getBreakdownsSummary"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getBreakdownsSummary"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="BreakdownReport">
+        <wsdl:port name="BreakdownReportHttpSoap11Endpoint" binding="ns:BreakdownReportSoap11Binding">
+            <soap:address location="http://wss.prepa.com/services/BreakdownReport.BreakdownReportHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="BreakdownReportHttpSoap12Endpoint" binding="ns:BreakdownReportSoap12Binding">
+            <soap12:address
+                    location="http://wss.prepa.com/services/BreakdownReport.BreakdownReportHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="BreakdownReportHttpEndpoint" binding="ns:BreakdownReportHttpBinding">
+            <http:address location="http://wss.prepa.com/services/BreakdownReport.BreakdownReportHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

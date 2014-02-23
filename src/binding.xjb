@@ -1,0 +1,13 @@
+<jaxb:bindings version="2.1"
+               xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <jaxb:globalBindings generateElementProperty="false"/>
+
+    <xjc:bindings schemaLocation="http://persistence.breakdown.prepa.com/xsd">
+        <xjc:schemaBindings>
+            <xjc:package name="com.prepa"/>
+        </xjc:schemaBindings>
+    </xjc:bindings>
+
+</jaxb:bindings>
